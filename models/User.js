@@ -25,6 +25,7 @@ const userSchema = mongoose.Schema({
     trim: true,
     minLength: [8, "Password must have at least 8 characters"],
     required: [true, "Please provide password"],
+    select: false,
   },
   shoppingLists: {
     type: [mongoose.Types.ObjectId],

@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import reducer from "./reducer";
 import axios from "axios";
 
@@ -11,16 +11,21 @@ import {
   REGISTER_USER_ERROR,
   REGISTER_USER_SUCCESS,
   SHOW_ALERT,
+  GET_CURRENT_USER_BEGIN,
+  GET_CURRENT_USER_SUCCESS,
+  LOGOUT_USER,
 } from "./actions";
 
 const initialState = {
   isLoading: false,
-  isLoadingUserData: false,
+  isLoadingUserData: true,
   loadingMsg: "",
   showAlert: "",
   alertType: "",
   alertMsg: "",
   user: null,
+  username: "",
+  email: "",
 };
 
 const AppContext = React.createContext();
@@ -33,12 +38,12 @@ const AppProvider = ({ children }) => {
   });
 
   fetchReq.interceptors.response.use(
-    (res) => {
-      return res;
+    (response) => {
+      return response;
     },
     (err) => {
       if (err.response.status === 401) {
-        // logout
+        //logOut();
       }
       return Promise.reject(err);
     }
@@ -60,8 +65,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: LOGIN_USER_BEGIN });
     try {
       const { data } = await fetchReq.post("/auth/login", { email, password });
-      console.log(data);
-      dispatch({ type: LOGIN_USER_SUCCESS });
+      dispatch({ type: LOGIN_USER_SUCCESS, payload: data.user });
     } catch (err) {
       dispatch({ type: LOGIN_USER_ERROR, payload: { msg: err.response.data.msg } });
     }
@@ -72,16 +76,36 @@ const AppProvider = ({ children }) => {
     dispatch({ type: REGISTER_USER_BEGIN });
     try {
       const { data } = await fetchReq.post("/auth/register", { email, password, username });
-      console.log(data);
-      dispatch({ type: REGISTER_USER_SUCCESS });
+      dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
     } catch (err) {
       dispatch({ type: REGISTER_USER_ERROR, payload: { msg: err.response.data.msg } });
     }
     clearAlert();
   };
 
+  const logOut = async () => {
+    await fetchReq("/auth/logout");
+    dispatch({ type: LOGOUT_USER });
+  };
+
+  const getCurrentUserData = async () => {
+    dispatch({ type: GET_CURRENT_USER_BEGIN });
+    try {
+      const { data } = await fetchReq("/auth/getUserData");
+      console.log(data);
+      dispatch({ type: GET_CURRENT_USER_SUCCESS, payload: data.user });
+    } catch (err) {
+      if (err.response.status === 401) return;
+    }
+  };
+
+  useEffect(() => {
+    getCurrentUserData();
+    // eslint-disable-next-line
+  }, []);
+
   return (
-    <AppContext.Provider value={{ ...state, logIn, signUp, displayAlert }}>
+    <AppContext.Provider value={{ ...state, logIn, signUp, displayAlert, logOut }}>
       {children}
     </AppContext.Provider>
   );

@@ -57,3 +57,18 @@ exports.login = async (req, res, next) => {
     user,
   });
 };
+
+exports.getCurrentUserData = async (req, res) => {
+  const { userId } = req.user;
+  const user = await User.findOne({ _id: userId });
+
+  res.status(200).json({ user });
+};
+
+exports.logout = async (req, res) => {
+  res.cookie("token", "logout", {
+    httpOnly: true,
+    expires: new Date(Date.now() + 1000),
+  });
+  res.status(200).json({ msg: "Logged out" });
+};

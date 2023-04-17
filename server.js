@@ -2,6 +2,7 @@ const express = require("express");
 require("express-async-errors");
 const dotenv = require("dotenv");
 dotenv.config();
+const morgan = require("morgan");
 
 const app = express();
 

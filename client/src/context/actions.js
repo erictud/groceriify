@@ -7,7 +7,14 @@ export const LOGIN_USER_BEGIN = "LOGIN_USER_BEGIN";
 export const LOGIN_USER_ERROR = "LOGIN_USER_ERROR";
 export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";
 
+export const LOGOUT_USER = "LOGOUT_USER";
+
 //! alerts
 
 export const SHOW_ALERT = "SHOW_ALERT";
 export const CLEAR_ALERT = "CLEAR_ALERT";
+
+//! fetch user data
+
+export const GET_CURRENT_USER_BEGIN = "GET_CURRENT_USER_BEGIN";
+export const GET_CURRENT_USER_SUCCESS = "GET_CURRENT_USER_SUCCESS";
