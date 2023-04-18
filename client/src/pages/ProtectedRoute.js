@@ -11,7 +11,7 @@ export default function ProtectedRoute({ children }) {
       </div>
     );
 
-  if (!user && !isLoadingUserData) {
+  if (!user) {
     return <Navigate to="/auth" />;
   }
   return children;

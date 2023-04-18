@@ -26,6 +26,26 @@ const initialState = {
   user: null,
   username: "",
   email: "",
+  activeLists: [
+    // {
+    //   id: "1",
+    //   title: "Family List",
+    //   numOfItems: 24,
+    //   numOfMembers: 4,
+    // },
+    // {
+    //   id: "2",
+    //   title: "Friends List",
+    //   numOfItems: 12,
+    //   numOfMembers: 3,
+    // },
+    // {
+    //   id: "3",
+    //   title: "School List",
+    //   numOfItems: 7,
+    //   numOfMembers: 5,
+    // },
+  ],
 };
 
 const AppContext = React.createContext();
@@ -43,7 +63,7 @@ const AppProvider = ({ children }) => {
     },
     (err) => {
       if (err.response.status === 401) {
-        //logOut();
+        logOut();
       }
       return Promise.reject(err);
     }

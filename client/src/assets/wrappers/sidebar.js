@@ -44,7 +44,7 @@ const Wrapper = styled.div`
     }
 
     svg {
-      font-size: 2.7rem;
+      font-size: 2.3rem;
     }
   }
 `;
