@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Wrapper from "../assets/wrappers/form-row-password";
-import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEyeInvisible, AiOutlineEye, AiOutlineInfoCircle } from "react-icons/ai";
 
-export default function FormRowPassword({ value, changeHandler }) {
+export default function FormRowPassword({ value, changeHandler, indications, labelText, name }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const changeVisibility = () => {
@@ -10,11 +10,17 @@ export default function FormRowPassword({ value, changeHandler }) {
   };
   return (
     <Wrapper>
-      <label htmlFor="password">password</label>
+      <label htmlFor="password">{!labelText ? "password" : labelText}</label>
+      {indications && (
+        <div className="info">
+          <AiOutlineInfoCircle />
+          <p>{indications}</p>
+        </div>
+      )}
       <div className="password-container">
         <input
           type={showPassword ? "text" : "password"}
-          name="password"
+          name={name || "password"}
           value={value}
           onChange={changeHandler}
         />

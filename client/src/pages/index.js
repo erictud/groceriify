@@ -8,6 +8,7 @@ import AddItemPage from "./dashboard/dashboard-list/AddItemPage";
 import SharedLayoutSecondary from "./dashboard/dashboard-list/SharedLayout";
 import AccountPage from "./dashboard/AccountPage";
 import CreateListPage from "./dashboard/CreateListPage";
+import JoinListPage from "./dashboard/JoinListPage";
 
 export {
   Authentication,
@@ -20,4 +21,5 @@ export {
   SharedLayoutSecondary,
   CreateListPage,
   AccountPage,
+  JoinListPage,
 };

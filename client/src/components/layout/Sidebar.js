@@ -7,6 +7,7 @@ import {
   AiFillHome,
   AiFillPlusSquare,
 } from "react-icons/ai";
+import { BsFileEarmarkPlus, BsFileEarmarkPlusFill } from "react-icons/bs";
 import { HiUser } from "react-icons/hi";
 
 export default function Sidebar() {
@@ -24,6 +25,12 @@ export default function Sidebar() {
         <div className="link">
           {pathname === "/create-list" ? <AiFillPlusSquare /> : <AiOutlinePlusSquare />}
           <p>create list</p>
+        </div>
+      </NavLink>
+      <NavLink to="/join-list" className={({ isActive }) => (isActive ? "active" : "")}>
+        <div className="link">
+          {pathname === "/join-list" ? <BsFileEarmarkPlusFill /> : <BsFileEarmarkPlus />}
+          <p>join list</p>
         </div>
       </NavLink>
       <NavLink to="/account">

@@ -37,6 +37,8 @@ html {
   --gray: #6a6b70;
   --black: #000;
   --white: #fff;
+  --red-light-error: #eaa8a8f1;
+  --green-light-alert: #47b347db;
 }
 
 /* general styles */
@@ -88,6 +90,25 @@ h2 {
   transition: 0.3s ease-in-out all;
 }
 
+.btn-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-flex svg {
+  font-size: 1.5rem;
+}
+
+.btn-red {
+  background-color: var(--red-dark);
+}
+
+.btn-red:hover {
+  background: var(--red-light);
+}
+
 .btn:hover {
   background: var(--primary-900);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -96,4 +117,10 @@ h2 {
 .btn:disabled {
   cursor: not-allowed;
   background-color: var(--primary-300);
+}
+
+.title {
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--primary-900);
 }

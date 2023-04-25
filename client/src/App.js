@@ -5,6 +5,7 @@ import {
   Authentication,
   CreateListPage,
   Error,
+  JoinListPage,
   SharedLayout,
   SharedLayoutSecondary,
   ShoppingListPage,
@@ -29,6 +30,7 @@ function App() {
           }
         >
           <Route path="create-list" element={<CreateListPage />} />
+          <Route path="join-list" element={<JoinListPage />} />
           <Route path="account" element={<AccountPage />} />
           <Route
             index

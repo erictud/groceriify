@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   z-index: 100;
   background-color: var(--primary-50);
   position: sticky;

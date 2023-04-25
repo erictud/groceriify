@@ -3,6 +3,7 @@ import { useAppContext } from "../../context/appContext";
 import { Link } from "react-router-dom";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { BiLogOut } from "react-icons/bi";
+import { AiOutlineLink, AiOutlinePlus } from "react-icons/ai";
 
 export default function AccountPage() {
   const { username, email, logOut } = useAppContext();
@@ -16,12 +17,24 @@ export default function AccountPage() {
         </div>
       </div>
       <div className="options-list">
-        <h2>Account settings</h2>
+        <h2 className="title">Account settings</h2>
         <ul className="list">
           <li className="list-item">
             <Link to="/">
               <HiOutlineClipboardList />
               <p>View all grocery lists</p>
+            </Link>
+          </li>
+          <li className="list-item">
+            <Link to="/">
+              <AiOutlinePlus />
+              <p>Create a grocery list</p>
+            </Link>
+          </li>
+          <li className="list-item">
+            <Link to="/">
+              <AiOutlineLink />
+              <p>Join a grocery list</p>
             </Link>
           </li>
           <li className="list-item" onClick={logOut}>

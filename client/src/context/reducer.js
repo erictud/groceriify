@@ -10,6 +10,9 @@ import {
   GET_CURRENT_USER_BEGIN,
   GET_CURRENT_USER_SUCCESS,
   LOGOUT_USER,
+  CREATE_LIST_BEGIN,
+  CREATE_LIST_ERROR,
+  CREATE_LIST_SUCCESS,
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -94,6 +97,31 @@ const reducer = (state, action) => {
   }
   if (action.type === LOGOUT_USER) {
     return { ...state, user: null, username: "", email: "", isLoadingUserData: false };
+  }
+  //! CREATE LIST
+  if (action.type === CREATE_LIST_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === CREATE_LIST_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertMsg: "List created successfully",
+    };
+  }
+  if (action.type === CREATE_LIST_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "error",
+      alertMsg: action.payload.msg,
+    };
   }
   throw new Error(`no such action : ${action.type}`);
 };

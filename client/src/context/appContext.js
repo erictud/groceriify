@@ -14,6 +14,9 @@ import {
   GET_CURRENT_USER_BEGIN,
   GET_CURRENT_USER_SUCCESS,
   LOGOUT_USER,
+  CREATE_LIST_BEGIN,
+  CREATE_LIST_ERROR,
+  CREATE_LIST_SUCCESS,
 } from "./actions";
 
 const initialState = {
@@ -27,24 +30,24 @@ const initialState = {
   username: "",
   email: "",
   activeLists: [
-    // {
-    //   id: "1",
-    //   title: "Family List",
-    //   numOfItems: 24,
-    //   numOfMembers: 4,
-    // },
-    // {
-    //   id: "2",
-    //   title: "Friends List",
-    //   numOfItems: 12,
-    //   numOfMembers: 3,
-    // },
-    // {
-    //   id: "3",
-    //   title: "School List",
-    //   numOfItems: 7,
-    //   numOfMembers: 5,
-    // },
+    {
+      id: "1",
+      title: "Family List",
+      numOfItems: 24,
+      numOfMembers: 4,
+    },
+    {
+      id: "2",
+      title: "Friends List",
+      numOfItems: 12,
+      numOfMembers: 3,
+    },
+    {
+      id: "3",
+      title: "School List",
+      numOfItems: 7,
+      numOfMembers: 5,
+    },
   ],
 };
 
@@ -124,8 +127,21 @@ const AppProvider = ({ children }) => {
     // eslint-disable-next-line
   }, []);
 
+  //! create list
+
+  const createList = async ({ title, password, shopsList }) => {
+    dispatch({ type: CREATE_LIST_BEGIN });
+    try {
+      console.log(title, password, shopsList);
+      dispatch({ type: CREATE_LIST_SUCCESS });
+    } catch (err) {
+      dispatch({ type: CREATE_LIST_ERROR, payload: { msg: err.response.data.msg } });
+    }
+    clearAlert();
+  };
+
   return (
-    <AppContext.Provider value={{ ...state, logIn, signUp, displayAlert, logOut }}>
+    <AppContext.Provider value={{ ...state, logIn, signUp, displayAlert, logOut, createList }}>
       {children}
     </AppContext.Provider>
   );

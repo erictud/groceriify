@@ -40,18 +40,18 @@ export default function AuthForm() {
       await logIn(email, password);
     } else {
       //? check values validity
-      // if (!email.trim() || !email.includes("@")) {
-      //   displayAlert("error", "Invalid email");
-      //   return;
-      // }
-      // if (!password || password.length < 8) {
-      //   displayAlert("error", "Invalid password (must have at least 8 characters)");
-      //   return;
-      // }
-      // if (!username || username.length < 4) {
-      //   displayAlert("error", "Invalid username (must have at least 4 characters)");
-      //   return;
-      // }
+      if (!email.trim() || !email.includes("@")) {
+        displayAlert("error", "Invalid email");
+        return;
+      }
+      if (!password || password.length < 8) {
+        displayAlert("error", "Invalid password (must have at least 8 characters)");
+        return;
+      }
+      if (!username || username.length < 4) {
+        displayAlert("error", "Invalid username (must have at least 4 characters)");
+        return;
+      }
       await signUp(email, password, username);
     }
   };
@@ -69,6 +69,7 @@ export default function AuthForm() {
                 labelText="username"
                 text="username"
                 type="text"
+                indications={false}
                 value={formValues.username}
                 changeHandler={handleChange}
               />
@@ -78,11 +79,16 @@ export default function AuthForm() {
               labelText="email"
               text="email"
               type="text"
+              indications={false}
               value={formValues.email}
               changeHandler={handleChange}
             />
             {/* Password Field */}
-            <FormRowPassword value={formValues.password} changeHandler={handleChange} />
+            <FormRowPassword
+              value={formValues.password}
+              indications={false}
+              changeHandler={handleChange}
+            />
           </div>
           <button disabled={isLoading} className="btn">
             {formValues.isMember ? (

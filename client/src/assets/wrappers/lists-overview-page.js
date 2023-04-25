@@ -9,12 +9,6 @@ const Wrapper = styled.div`
   gap: 4rem;
   padding: 0 1rem;
 
-  h2 {
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--primary-900);
-  }
-
   .no-list-container {
     display: flex;
     flex-direction: column;

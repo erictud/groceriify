@@ -14,6 +14,7 @@ const connectDb = require("./utils/connectDb");
 const cookieParser = require("cookie-parser");
 
 const authRouter = require("./routers/authRoutes");
+const listRouter = require("./routers/listRouters");
 const routeNotFoundMiddleware = require("./middleware/routeNotFoundHandler");
 const errorMiddleware = require("./middleware/errorHandler");
 
@@ -26,6 +27,7 @@ app.use(express.json());
 
 //! ROUTERS
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1", listRouter);
 
 //! ERROR MIDDLEWARE
 //* route not found

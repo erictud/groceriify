@@ -9,7 +9,7 @@ export default function ShoppingListsPage() {
   const { activeLists } = useAppContext();
   return (
     <Wrapper>
-      <h2>All lists:</h2>
+      <h2 className="title">All lists:</h2>
       {activeLists.length > 0 ? (
         activeLists.map((list) => (
           <ListOverview
@@ -29,6 +29,16 @@ export default function ShoppingListsPage() {
             <AiOutlinePlus />
           </Link>
         </div>
+      )}
+      {activeLists.length > 0 && activeLists.length < 3 ? (
+        <div className="no-list-container">
+          <Link to="/create-list">
+            <h3>create another list here</h3>
+            <AiOutlinePlus />
+          </Link>
+        </div>
+      ) : (
+        <></>
       )}
     </Wrapper>
   );
