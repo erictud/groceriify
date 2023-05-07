@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const listSchema = mongoose.Schema({
-  title: {
+  name: {
     type: String,
     trim: true,
     minLength: [2, "Enter a valid title (min. 2 characters)"],
@@ -26,6 +27,19 @@ const listSchema = mongoose.Schema({
     type: [mongoose.Types.ObjectId],
   },
 });
+
+listSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+
+  const salt = await bcrypt.genSalt(4);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+listSchema.methods.passwordsMatch = async function (password) {
+  const isMatch = await bcrypt.compare(password, this.password);
+  return isMatch;
+};
 
 const List = mongoose.model("List", listSchema);
 
